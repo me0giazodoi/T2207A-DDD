@@ -7,7 +7,7 @@ create table SanPham(
 	ten nvarchar(255) not null,
 	donvi nvarchar(50) not null,
 	mota ntext,
-	gia decimal(12,4) not null check(gia >=0) default getdate(),
+	gia decimal(12,4) not null check(gia >=0),
 	id integer primary key identity(1,1)
 );
 create table DonHang(
@@ -23,7 +23,7 @@ create table DonHang_SanPham(
 	thanhtien decimal(12,4) not null check (thanhtien >=0)
 );
 
---drop table DonHang_SanPham;
---drop table DonHang;
---drop table SanPham;
---drop table KhachHang;
+drop table DonHang_SanPham;
+drop table DonHang;
+drop table SanPham;
+drop table KhachHang;
