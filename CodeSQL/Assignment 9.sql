@@ -21,8 +21,8 @@ create table DongXe(
 );
 create table DangKyCungCap(
 	MaDKCC varchar(20) primary key,
-	NgayBatDauCungCap date not null check(NgayBatDauCungCap <= getdate()),
-	NgayKetThucCungCap date not null check(NgayKetThucCungCap = getdate()),
+	NgayBatDauCungCap date not null check(NgayBatDauCungCap < getdate()),
+	NgayKetThucCungCap date not null check(NgayKetThucCungCap <= getdate()),
 	SoLuongXeDangKy integer not null check (SoLuongXeDangKy >0),
 	MaNhaCC varchar(20) not null foreign key references NhaCungCap(MaNhaCC),
 	MaLoaiDV varchar(20) not null foreign key references LoaiDichVu(MaLoaiDV),
