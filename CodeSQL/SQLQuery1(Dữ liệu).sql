@@ -19,10 +19,10 @@ values('123',1,1,1000),
 ('123',3,1,100);
 select * from DonHang_SanPham;
 
-delete from KhachHang;
-delete from SanPham;
-delete from DonHang;
-delete from DonHang_SanPham;
+--delete from KhachHang;
+--delete from SanPham;
+--delete from DonHang;
+--delete from DonHang_SanPham;
 
 update SanPham set gia = 150 where id = 4;
 update SanPham set gia = gia + 50 where id = 3;
