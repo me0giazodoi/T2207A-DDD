@@ -9,8 +9,7 @@ values (N'Máy Tính T450',N'Chiếc',N'Máy nhập mới',1000),
 select * from SanPham;
 
 insert into DonHang(ma,ngaydat,tongtien,dienthoai)
-values('123','2022-10-26',1500,'0987654321'),
-('124','2022-10-26',1500,'0987654321');
+values('123','2022-10-26',1500,'0987654321');
 select * from DonHang;
 
 insert into DonHang_SanPham(maDH,spid,soluong,thanhtien)
@@ -19,10 +18,10 @@ values('123',1,1,1000),
 ('123',3,1,100);
 select * from DonHang_SanPham;
 
---delete from KhachHang;
---delete from SanPham;
---delete from DonHang;
---delete from DonHang_SanPham;
+delete from KhachHang;
+delete from SanPham;
+delete from DonHang;
+delete from DonHang_SanPham;
 
 update SanPham set gia = 150 where id = 4;
 update SanPham set gia = gia + 50 where id = 3;
@@ -65,3 +64,33 @@ select * from DonHang;
 select count(*),dienthoai from DonHang group by dienthoai;
 select sum(tongtien), dienthoai from DonHang group by dienthoai;
 select avg(tongtien), dienthoai from DonHang group by dienthoai;
+
+--Demo bài mới
+select * from DonHang;
+select * from KhachHang;
+
+--Sub-query
+select * from DonHang where dienthoai in (select dienthoai from KhachHang where ten like N'Nguyễn Văn An');
+delete from DonHang where dienthoai in (select dienthoai from KhachHang where ten like N'Nguyễn Văn An');
+
+--Tìm tất cả các sản phẩm mà Nguyễn Văn An đã mua
+select * from SanPham where id in
+(select spid from DonHang_SanPham where maDH in 
+(select ma from DonHang where dienthoai in 
+(select dienthoai from KhachHang where ten like N'Nguyễn Văn An')));
+
+--Tìm những ai đã mua Máy tính T450
+select * from KhachHang where dienthoai in
+(select dienthoai from DonHang  where ma in
+(select maDH from DonHang_SanPham where spid in
+(select id from SanPham where ten like N'Máy Tính T450')));
+
+--Ghép bảng
+select DonHang.*,KhachHang.ten from DonHang inner join KhachHang 
+on DonHang.dienthoai = KhachHang.dienthoai 
+where KhachHang.ten like N'Nguyễn Văn An';
+
+select * from DonHang_SanPham a 
+inner join DonHang b on a.maDH = b.ma
+inner join SanPham c on a.spid = c.id
+inner join KhachHang d on b.dienthoai = d.dienthoai;
