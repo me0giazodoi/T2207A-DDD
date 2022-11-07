@@ -32,5 +32,5 @@ select count(*) as TổngSốThuêBao from ThueBao;
 select count(*) as TổngSốThuêBaoĐăngKi from ThueBao;
 select SoThueBao from ThueBao where SoThueBao in (select SoThueBao from ThueBao where NgayDangKi like '2002-12-12');
 --Bài 6-d
-select a.*,b.SoThueBao,b.LoaiThueBao,b.NgayDangKi from KhachHang a
-inner join ThueBao b on a.SoChungMinhThu = b.SoChungMinhThu;
+select * from ThueBao a
+left join KhachHang b on a.SoChungMinhThu = b.SoChungMinhThu
